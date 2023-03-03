@@ -1,3 +1,6 @@
+[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
+
+
 # Web Application Firewall (WAF) for Directory Brute Force Attacks
 A firewall designed specifically to protect web applications from directory brute force attacks.
 
