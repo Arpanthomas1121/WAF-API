@@ -27,7 +27,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 // Create an instance of the express application
 const app = express();
-
+const port = process.env.PORT || 3002;
 // // Use the morgan middleware to log HTTP requests
 // app.use(
 //   morgan('combined', {
