@@ -10,20 +10,20 @@ const morgan = require('morgan');
 const httpProxy = require('http-proxy');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-// Define the path to the logs directory
-const logDirectory = path.join(__dirname, 'logs');
+// // Define the path to the logs directory
+// const logDirectory = path.join(__dirname, 'logs');
 
-// Check if the logs directory exists
-// If it doesn't, create it
-if (!fs.existsSync(logDirectory)) {
-  fs.mkdirSync(logDirectory);
-}
+// // Check if the logs directory exists
+// // If it doesn't, create it
+// if (!fs.existsSync(logDirectory)) {
+//   fs.mkdirSync(logDirectory);
+// }
 
-// Create a write stream for the access log file
-const accessLogStream = fs.createWriteStream(
-  path.join(logDirectory, 'access.log'),
-  {flags: 'a'}
-);
+// // Create a write stream for the access log file
+// const accessLogStream = fs.createWriteStream(
+//   path.join(logDirectory, 'access.log'),
+//   {flags: 'a'}
+// );
 
 // Create an instance of the express application
 const app = express();
