@@ -28,12 +28,12 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 // Create an instance of the express application
 const app = express();
 
-// Use the morgan middleware to log HTTP requests
-app.use(
-  morgan('combined', {
-    stream: accessLogStream
-  })
-);
+// // Use the morgan middleware to log HTTP requests
+// app.use(
+//   morgan('combined', {
+//     stream: accessLogStream
+//   })
+// );
 
 let requestCounts = {};
 let bannedIPs = [];
