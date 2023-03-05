@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const httpProxy = require('http-proxy');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const moment = require ('moment');
+const port = process.env.PORT || 3002;
 
 // Define the path to the logs directory
 const logDirectory = path.join(__dirname, 'logs');
@@ -188,12 +189,13 @@ next();
 });
 
 app.use((req,res)=>{
-    // res.redirect('https://cyberv-webserver.onrender.com'+ request);
-    res.redirect('http://localhost:3002'+ req.url);
+    res.redirect('https://cyberv-webserver.onrender.com'+ request);
+    // res.redirect('http://localhost:3002'+ req.url);
   res.status(200).send("OK");
 });
 
-// Start the server and log a message to indicate that it's listening on port 3001
-const server = app.listen(3001, 'localhost', () => {
-  console.log("WAF listening on port 3001");
-});
+// uncomment this when running in local host 
+// const server = app.listen(3001, 'localhost', () => {
+//   console.log("WAF listening on port 3001");
+// });
+app.listen(port, () => console.log(`WAF server listening on port ${port}!`));
