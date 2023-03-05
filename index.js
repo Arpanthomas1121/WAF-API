@@ -92,11 +92,12 @@ app.use(limiter);
 
 // Custom middleware to prevent directory traversal attacks
 const publicDirectories = [ "/public", "/greeting", "/big", "/home", "/login"];
-
+var request;
 app.use((req, res, next) => {
 // Normalize the requested path to prevent encoding attacks
 const path = decodeURIComponent(req.path).split('.')[0];
 console.log('path: ',path);
+  request=path;
 // Check if the requested path is in the list of public directories
 if (publicDirectories.some(publicDirectories => path.startsWith(publicDirectories))) {
   // If it is, continue to the next middleware
