@@ -12,30 +12,30 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const moment = require ('moment');
 const port = process.env.PORT || 3002;
 
-// Define the path to the logs directory
-const logDirectory = path.join(__dirname, 'logs');
+// // Define the path to the logs directory
+// const logDirectory = path.join(__dirname, 'logs');
 
-// Check if the logs directory exists
-// If it doesn't, create it
-if (!fs.existsSync(logDirectory)) {
-  fs.mkdirSync(logDirectory);
-}
+// // Check if the logs directory exists
+// // If it doesn't, create it
+// if (!fs.existsSync(logDirectory)) {
+//   fs.mkdirSync(logDirectory);
+// }
 
-// Create a write stream for the access log file
-const accessLogStream = fs.createWriteStream(
-  path.join(logDirectory, 'access.log'),
-  {flags: 'a'}
-);
+// // Create a write stream for the access log file
+// const accessLogStream = fs.createWriteStream(
+//   path.join(logDirectory, 'access.log'),
+//   {flags: 'a'}
+// );
 
 // Create an instance of the express application
 const app = express();
 
-// Use the morgan middleware to log HTTP requests
-app.use(
-  morgan('combined', {
-    stream: accessLogStream
-  })
-);
+// // Use the morgan middleware to log HTTP requests
+// app.use(
+//   morgan('combined', {
+//     stream: accessLogStream
+//   })
+// );
 
 // Define a global object to hold banned IPs and their ban timestamps
 const bannedIPs = {};
