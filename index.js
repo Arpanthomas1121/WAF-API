@@ -56,7 +56,7 @@ function is_ip_banned(ip) {
 // Middleware function to rate limit requests
 const limiter = (req, res, next) => {
   const rateLimit = 10; // Maximum requests per IP in a given time frame
-  const ip = IP.address();// Check if request has an array of IP addresses
+  const ip = req.socket.remoteAddress;// Check if request has an array of IP addresses
 
   // Check if the IP is banned
   if (is_ip_banned(ip)) {
