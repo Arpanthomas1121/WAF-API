@@ -57,8 +57,8 @@ function is_ip_banned(ip) {
 const limiter = (req, res, next) => {
   const rateLimit = 10; // Maximum requests per IP in a given time frame
   const ip = req.socket.remoteAddress;// Check if request has an array of IP addresses
-
-  // Check if the IP is banned
+//const ip = IP.address();
+//Check if the IP is banned
   if (is_ip_banned(ip)) {
     console.log(`IP ${ip} is banned`);
     res.statusCode = 429; // Return error with status code 429 (Too Many Requests) if IP is banned
