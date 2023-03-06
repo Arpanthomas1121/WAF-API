@@ -59,9 +59,9 @@ const limiter = (req, res, next) => {
 
   // Check if the IP is banned
   if (is_ip_banned(ip)) {
-    console.log(`IP ${ip} is banned`);
+    console.log(`IP ${req.ip} is banned`);
     res.statusCode = 429; // Return error with status code 429 (Too Many Requests) if IP is banned
-    return res.end(`Too many requests from IP ${ip}`);
+    return res.end(`Too many requests from IP ${req.ip}`);
   }
 
   // Increment the request count for the IP
@@ -73,10 +73,10 @@ const limiter = (req, res, next) => {
 
   // Ban the IP if request count exceeds rate limit
   if (requestCounts[ip] > rateLimit) {
-    console.log(`IP ${ip} exceeded the rate limit`);
+    console.log(`IP ${req.ip} exceeded the rate limit`);
     ban_ip(ip);
     res.statusCode = 429; // Return error with status code 429 (Too Many Requests) if IP exceeds rate limit
-    return res.end(`Too many requests from IP ${ip}`);
+    return res.end(`Too many requests from IP ${req.ip}`);
   }
 
   // Call next middleware if IP is not banned and request count is within the rate limit
@@ -192,7 +192,7 @@ next();
 app.use((req,res)=>{
     res.redirect('https://cyberv-webserver.onrender.com'+ request);
     // res.redirect('http://localhost:3002'+ req.url);
-  res.status(200).send("OK");
+//  res.status(200).send("OK");
 });
 
 // uncomment this when running in local host 
