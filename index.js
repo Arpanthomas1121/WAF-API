@@ -11,6 +11,7 @@ const httpProxy = require('http-proxy');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const moment = require ('moment');
 const port = process.env.PORT || 3002;
+const IP = require('ip');
 
 // // Define the path to the logs directory
 // const logDirectory = path.join(__dirname, 'logs');
@@ -55,13 +56,13 @@ function is_ip_banned(ip) {
 // Middleware function to rate limit requests
 const limiter = (req, res, next) => {
   const rateLimit = 10; // Maximum requests per IP in a given time frame
-  const ip = req.ips ? req.ips[0] : req.ip; // Check if request has an array of IP addresses
+  const ip = IP.address();// Check if request has an array of IP addresses
 
   // Check if the IP is banned
   if (is_ip_banned(ip)) {
-    console.log(`IP ${req.ip} is banned`);
+    console.log(`IP ${ip} is banned`);
     res.statusCode = 429; // Return error with status code 429 (Too Many Requests) if IP is banned
-    return res.end(`Too many requests from IP ${req.ip}`);
+    return res.end(`Too many requests from IP ${ip}`);
   }
 
   // Increment the request count for the IP
@@ -73,10 +74,10 @@ const limiter = (req, res, next) => {
 
   // Ban the IP if request count exceeds rate limit
   if (requestCounts[ip] > rateLimit) {
-    console.log(`IP ${req.ip} exceeded the rate limit`);
+    console.log(`IP ${ip} exceeded the rate limit`);
     ban_ip(ip);
     res.statusCode = 429; // Return error with status code 429 (Too Many Requests) if IP exceeds rate limit
-    return res.end(`Too many requests from IP ${req.ip}`);
+    return res.end(`Too many requests from IP ${ip}`);
   }
 
   // Call next middleware if IP is not banned and request count is within the rate limit
