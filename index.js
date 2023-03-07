@@ -62,7 +62,7 @@ const limiter = (req, res, next) => {
 //const ip = req.socket.remoteAddress;// Check if request has an array of IP addresses
 //const ip = IP.address();
  const ip = requestIp.getClientIp(req);
-  console.log("Request client IP:"+ clientIp);
+  console.log("Request client IP:"+ ip);
 
 
 //Check if the IP is banned
