@@ -10,8 +10,8 @@ const morgan = require('morgan');
 const httpProxy = require('http-proxy');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const moment = require ('moment');
-const port = process.env.PORT || 3002;
-const IP = require('ip');
+var requestIp = require('request-ip');
+const port = process.env.PORT || 3001;
 
 // // Define the path to the logs directory
 // const logDirectory = path.join(__dirname, 'logs');
@@ -56,8 +56,15 @@ function is_ip_banned(ip) {
 // Middleware function to rate limit requests
 const limiter = (req, res, next) => {
   const rateLimit = 10; // Maximum requests per IP in a given time frame
-  const ip = req.socket.remoteAddress;// Check if request has an array of IP addresses
+
+
+
+//const ip = req.socket.remoteAddress;// Check if request has an array of IP addresses
 //const ip = IP.address();
+ const ip = requestIp.getClientIp(req);
+  console.log("Request client IP:"+ clientIp);
+
+
 //Check if the IP is banned
   if (is_ip_banned(ip)) {
     console.log(`IP ${ip} is banned`);
